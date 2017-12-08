@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 //using Microsoft.Win32;
+using System.IO;
 using System.Windows.Forms;
 
 namespace RenameApp
@@ -25,6 +26,7 @@ namespace RenameApp
         private List<string> filenames;
         private int startValue;
         private string outputPath;
+        
 
         public MainWindow()
         {
@@ -78,11 +80,6 @@ namespace RenameApp
             transparancyConverter.MakeTransparent();
         }
 
-        private void Button_Click_1(object sender, RoutedEventArgs e)
-        {
-
-        }
-
         private void CloseButton_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
@@ -120,11 +117,41 @@ namespace RenameApp
 
             diag.ShowDialog();
 
-            outputPath = diag.SelectedPath;
+            if (diag.SelectedPath == "")
+            {
+                return;
+            }
 
+            outputPath = diag.SelectedPath;         
 
+        }
 
-            
+        private void SelectDirButton_Click(object sender, RoutedEventArgs e)
+        {
+            filenames.Clear();
+
+            var diag = new FolderBrowserDialog();
+
+            diag.ShowDialog();
+
+            if(diag.SelectedPath == "")
+            {
+                return;
+            }
+
+            string inputPath = diag.SelectedPath;
+
+            string[] files = Directory.GetFiles(inputPath);
+
+            string concatenatedFilenames = "";
+
+            foreach(string file in files)
+            {
+                concatenatedFilenames += file + "\n";
+                filenames.Add(file);
+            }
+
+            FileListTextBlock.Text = concatenatedFilenames;
 
         }
     }
