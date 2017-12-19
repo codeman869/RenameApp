@@ -64,7 +64,17 @@ namespace RenameApp
                 string newFilename = number + prefix + extension;
                // string directory = System.IO.Path.GetDirectoryName(file);
                 string newPath = System.IO.Path.Combine(outputDir,  newFilename);
-                File.Move(file, newPath);
+                try
+                {
+                    File.Move(file, newPath);
+                }
+                catch (Exception e)
+                {
+                    MessageBox.Show("There was an error moving files, some files may not have been copied!");
+                    return;
+                    
+                }
+                
                 finalNames.Add(newPath);
                 i++;
             }
