@@ -94,7 +94,28 @@ namespace RenameApp
         private void RenameButton_Click(object sender, RoutedEventArgs e)
         {
             string prefix = PrefixTextBox.Text;
-            Rename win = new Rename(filenames, prefix, outputPath, startValue);
+            char[] separator = SeparatorTextBox.Text.ToCharArray();
+            var invalidFilenameChars = System.IO.Path.GetInvalidFileNameChars();
+            var prefixChars = prefix.ToArray();
+            foreach(var c in prefixChars)
+            {
+                if (invalidFilenameChars.Contains(c))
+                {
+                    System.Windows.MessageBox.Show($"{c} is an invalid filename character!");
+                    return;
+                }
+            }
+
+            foreach(var c in separator)
+            {
+                if(invalidFilenameChars.Contains(c))
+                {
+                    System.Windows.MessageBox.Show($"Separator contains invalid characters! {c} is an invalid filename character!");
+                    return;
+                }
+            }
+            
+            Rename win = new Rename(filenames, prefix, outputPath, startValue, separator);
             win.ShowDialog();
             //this.Close();
         }

@@ -23,16 +23,18 @@ namespace RenameApp
         private List<string> filenames;
         private string outputDir;
         private string prefix;
+        private char[] separator;
         private int startValue;
         private List<string> finalNames;
 
-        public Rename(List<string> filenames, string prefix, string outputDir, int startValue)
+        public Rename(List<string> filenames, string prefix, string outputDir, int startValue, char[] separator)
         {
             InitializeComponent();
             this.filenames = new List<string>(filenames);
             this.outputDir = outputDir;
             this.prefix = prefix;
             this.startValue = startValue;
+            this.separator = separator;
 
             finalNames = new List<string>();
             
@@ -61,7 +63,7 @@ namespace RenameApp
 
                 
                 string extension = System.IO.Path.GetExtension(file);
-                string newFilename = number + prefix + extension;
+                string newFilename = number + new string(separator) + prefix + extension;
                // string directory = System.IO.Path.GetDirectoryName(file);
                 string newPath = System.IO.Path.Combine(outputDir,  newFilename);
                 try

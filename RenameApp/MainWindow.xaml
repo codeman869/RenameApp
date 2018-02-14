@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:RenameApp"
         mc:Ignorable="d"
-        Title="RenameApp" Height="350" Width="525" WindowStyle="None" AllowsTransparency="True" Loaded="MainWindow1_Loaded" MouseDown="MainWindow1_MouseDown" ResizeMode="CanResizeWithGrip" BorderThickness="0">
+        Title="RenameApp" Height="400
+        " Width="525" WindowStyle="None" AllowsTransparency="True" Loaded="MainWindow1_Loaded" MouseDown="MainWindow1_MouseDown" ResizeMode="CanResizeWithGrip" BorderThickness="0">
     <Window.Background>
         <SolidColorBrush Color="White" Opacity="0.9"/>
     </Window.Background>
@@ -24,10 +25,12 @@
         <TextBlock x:Name="FileListTextBlock" HorizontalAlignment="Left" Margin="8,8,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Grid.Column="1" Grid.ColumnSpan="2"/>
         <Button x:Name="RenameButton" Content="Rename" HorizontalAlignment="Left" Margin="8,8,0,0" VerticalAlignment="Top" IsEnabled="False" Grid.Column="2" Height="22" Grid.Row="1" Width="112" Click="RenameButton_Click"/>
         <Button x:Name="SelectDirButton" Content="Select Dir" HorizontalAlignment="Left" Margin="8,65,0,0" VerticalAlignment="Top" Width="75" Click="SelectDirButton_Click"/>
-        <Button x:Name="CloseButton" Content="Exit App" HorizontalAlignment="Left" Margin="8,259,0,0" VerticalAlignment="Top" Width="75" Click="CloseButton_Click"/>
+        <Button x:Name="CloseButton" Content="Exit App" HorizontalAlignment="Left" Margin="8,0,0,10" Width="75" Click="CloseButton_Click" Height="22" VerticalAlignment="Bottom"/>
         <Slider Margin="0,200,10,0" VerticalAlignment="Top" ValueChanged="Slider_ValueChanged" SmallChange="1" IsSnapToTickEnabled="True"/>
         <TextBlock x:Name="SliderDisplay" Margin="10,174,10,0" TextWrapping="Wrap" Text="Start Value: 0" VerticalAlignment="Top"/>
         <Button x:Name="OutputDirButton" Content="Output Dir" HorizontalAlignment="Left" Margin="10,147,0,0" VerticalAlignment="Top" Width="75" Click="OutputDirButton_Click"/>
+        <TextBox x:Name="SeparatorTextBox" Height="23" Margin="8,277,12,0" MaxLength="2" TextWrapping="Wrap" Text="" VerticalAlignment="Top"/>
+        <TextBlock Margin="10,256,10,0" TextWrapping="Wrap" Text="Separator" VerticalAlignment="Top"/>
 
     </Grid>
 </Window>
