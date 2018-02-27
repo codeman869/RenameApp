@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -50,37 +52,43 @@ namespace RenameApp
 
         private void StartRenamingFiles()
         {
-            var i = startValue;
-            
-            foreach (var file in filenames)
+            //var i = startValue;
+
+            Parallel.ForEach(filenames, (file) =>
             {
-                string number = "";
+                var i = filenames.IndexOf(file) + startValue;
+                var number = "";
 
-                if (i < 10)
+                if( i < 10)
+                {
                     number = "0" + i;
-                else
+                } else
+                {
                     number += i;
+                }
 
-                
                 string extension = System.IO.Path.GetExtension(file);
                 string newFilename = number + new string(separator) + prefix + extension;
-               // string directory = System.IO.Path.GetDirectoryName(file);
-                string newPath = System.IO.Path.Combine(outputDir,  newFilename);
+
+                string newPath = System.IO.Path.Combine(outputDir, newFilename);
+
                 try
                 {
+                    Debug.WriteLine($"Moving {newFilename} on {Thread.CurrentThread.ManagedThreadId}");
                     File.Move(file, newPath);
                 }
                 catch (Exception e)
                 {
                     MessageBox.Show("There was an error moving files, some files may not have been copied!");
                     return;
-                    
-                }
-                
-                finalNames.Add(newPath);
-                i++;
-            }
 
+                }
+
+                finalNames.Add(newFilename);
+
+               
+            });
+            
             var concatenated = "";
 
             foreach(string file in finalNames)
